@@ -13,7 +13,7 @@ class Owner(User):
                                 verbose_name=("Telephone"))
 
     def __unicode__(self):
-        return _(u'%(name)s') % {"name": self.username}
+        return (u'%(name)s') % {"name": self.username}
 
 
 class Download(models.Model):
@@ -33,3 +33,13 @@ class Download(models.Model):
                             choices=LEVEL, default=LEVEL_NOR)
     owner = models.ForeignKey(Owner, related_name='owner',\
                                      verbose_name=("priority"))
+    date = models.DateField(verbose_name=("made the "),\
+                             default=datetime.datetime.today)
+    size = models.PositiveIntegerField(blank=True,
+                                            verbose_name=("size"))
+                                     
+
+    def __unicode__(self):
+        return (u'%(name)s %(priority)s %(size)d %(date)s') % \
+                {"name": self.owner.username, "priority": self.priority, \
+                 "size": self.size, "date": self.date}
