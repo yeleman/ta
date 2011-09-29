@@ -5,40 +5,41 @@
 import datetime
 from django.db import models
 from django.contrib.auth.models import User
-
-
-class Owner(User):
-    
-    phone = models.CharField(max_length=30, blank=True,
-                                verbose_name=("Telephone"))
-
-    def __unicode__(self):
-        return (u'%(name)s') % {"name": self.username}
+from django.utils.translation import ugettext_lazy, ugettext as _
 
 
 class Download(models.Model):
     """ """
-    LEVEL_FAST = "f"
-    LEVEL_NOR = "n"
+    LEVEL_URGENT = "f"
+    LEVEL_DEFAULT = "n"
     LEVEL_SLOW = "s"
-    LEVEL = (
-        (LEVEL_FAST, u"Fast"),
-        (LEVEL_NOR, u"Normal"),
-        (LEVEL_SLOW, u"Slow")
-    )
-    link_download = models.CharField(max_length=150,\
-                            verbose_name=("url"))
-    priority =  models.CharField(max_length=30,
-                            verbose_name=("priority"),\
-                            choices=LEVEL, default=LEVEL_NOR)
-    owner = models.ForeignKey(Owner, related_name='owner',\
-                                     verbose_name=("priority"))
-    date = models.DateField(verbose_name=("made the "),\
-                             default=datetime.datetime.today)
-    size = models.PositiveIntegerField(blank=True,
-                                            verbose_name=("size"))
-                                     
-
+    LEVEL = ((LEVEL_URGENT, u"urgent"), (LEVEL_DEFAULT, u"default"), \
+              (LEVEL_SLOW, u"Slow"))
+    URL = "u"
+    TORRENTE = "T"
+    TYPE = ((URL, u"url"), (TORRENTE, u"Torrente"))
+    START = "c"
+    PAUSE = "p"
+    STOP = "a"
+    STATUS = ((START, u"start"), (PAUSE, u"pause"), (STOP, u"stop"))
+    
+    types = models.CharField(max_length=30, verbose_name=(_("type")),\
+                                              choices=TYPE, default=URL)
+    link = models.CharField(max_length=150,\
+                            verbose_name=(_("url")))
+    priority = models.CharField(max_length=30, verbose_name=(_("priority")),\
+                                    choices=LEVEL, default=LEVEL_DEFAULT)
+    owner = models.ForeignKey(User, related_name=_('owner'),\
+                                    verbose_name=_("owner"))
+    date = models.DateTimeField(verbose_name=(_("made the ")),\
+                                         default=datetime.datetime.today)
+    size = models.PositiveIntegerField(blank=True, \
+                                       verbose_name=(_("size")))
+    status = models.CharField(max_length=30, verbose_name=(_("status")),\
+                                            choices=STATUS, default=START)
+    path = models.CharField(max_length=250, verbose_name=(_("path")))
+    progression = models.CharField(max_length=150,\
+                            verbose_name=(_("progression")))
     def __unicode__(self):
         return (u'%(name)s %(priority)s %(size)d %(date)s') % \
                 {"name": self.owner.username, "priority": self.priority, \

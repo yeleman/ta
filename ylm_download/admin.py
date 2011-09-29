@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from ylm_download.models import Owner, Download
-
-admin.site.register(Owner)
+from ylm_download.models import Download
+ 
+ 
 admin.site.register(Download)
