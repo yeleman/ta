@@ -4,8 +4,9 @@ from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+
 urlpatterns = patterns('',
-    # Examples: 
+    # Examples:
     # url(r'^download_m/', include('download_m.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
@@ -22,7 +23,6 @@ urlpatterns = patterns('',
     url(r"^edit_dl$", "ylm_download.views.edit_dl", name="edit_dl"),
     url(r"^info_dl$", "ylm_download.views.info_dl", name="info_dl"),
     url(r"^remove_dl$", "ylm_download.views.dellete_dl", name="dellete"),
-    
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 )

@@ -22,7 +22,6 @@ class Download(models.Model):
     PAUSE = "p"
     STOP = "a"
     STATUS = ((START, u"start"), (PAUSE, u"pause"), (STOP, u"stop"))
-    
     types = models.CharField(max_length=30, verbose_name=(_("type")),\
                                               choices=TYPE, default=URL)
     link = models.CharField(max_length=150,\
@@ -40,6 +39,7 @@ class Download(models.Model):
     path = models.CharField(max_length=250, verbose_name=(_("path")))
     progression = models.CharField(max_length=150,\
                             verbose_name=(_("progression")))
+
     def __unicode__(self):
         return (u'%(name)s %(priority)s %(size)d %(date)s') % \
                 {"name": self.owner.username, "priority": self.priority, \

@@ -4,8 +4,8 @@
 import locale
 import os
 
-abs_path= os.path.abspath(__file__)
-ROOT_DIR= os.path.dirname(abs_path)
+abs_path = os.path.abspath(__file__)
+ROOT_DIR = os.path.dirname(abs_path)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -18,12 +18,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'download.sqlite',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'download.sqlite',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
@@ -106,8 +106,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'urls'
 
-TEMPLATE_DIRS = ( os.path.join(ROOT_DIR, "templates")
-)
+TEMPLATE_DIRS = (os.path.join(ROOT_DIR, "templates"))
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -133,9 +132,7 @@ LOGGING = {
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
-    },
+            'class': 'django.utils.log.AdminEmailHandler'}},
     'loggers': {
         'django.request': {
             'handlers': ['mail_admins'],

@@ -1,9 +1,9 @@
 # Create your views here.
- 
+
 from django.shortcuts import  render_to_response
 from django.core.context_processors import csrf
 
- 
+
 def login(request):
     """ """
     ctx = {}
@@ -93,4 +93,3 @@ def edit_dl(request):
     ctx.update(csrf(request))
     ctx.update({"page": "edit_dl"})
     return render_to_response("test.html", ctx)
-
